@@ -1,0 +1,62 @@
+<h3 class="text-center">TODO List for <%= Date.today.strftime("%m/%d/%y") %></h3>
+<br>
+
+
+<table class="table table-striped table-responsive table-bordered table-hover">
+  <tbody>
+    <tr>
+      <th>Completed?</th>
+      <th>Task Name</th>
+      <th>Deadline:</th>
+      <th>Completed On:</th>
+      <th>Details:</th>
+      <th>Edit:</th>
+      <th>Delete:</th>
+    </tr>
+    <% @tasks.each do |task| %>
+    <tr class="<%= 'table-warning' if task.past_due? %>">
+      <td class="text-center">
+        <% if task.completed? %>
+          <i class="glyphicon glyphicon-check"></i>
+        <% end %>
+      </td>
+      <td><%= task.name %></td>
+      <td><%= task.pretty_deadline_date %></td>
+      <td><%= task.pretty_completed_at %></td>
+      <td>
+        <% if task.description? %>
+        <!-- Button trigger modal -->
+          <button class="btn btn-primary btn-xs" data-toggle="modal" data-target="#task-<%= task.id %>-description">
+            View Details
+          </button>
+      </td>
+        <!-- Modal -->
+        <div class="modal fade" id="task-<%= task.id %>-description" tabindex="-1" role="dialog" aria-labelledby="task-<%= task.id %>-label" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h4 class="modal-title" id="task-<%= task.id %>-label">Task Details</h4>
+              </div>
+              <div class="modal-body">
+                <%= task.description %>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <% end %>
+        <!-- end Modal -->
+      <td><%= link_to "Edit Task", edit_task_path(task), class: 'btn btn-info btn-xs' %></td>
+      <td>
+        <%= link_to task, method: :delete, data: {confirm: "Are you sure?" }, class: 'btn btn-danger btn-xs' do %>
+          <i class="glyphicon glyphicon-trash"></i> Delete Task
+        <% end %>
+      </td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<hr>

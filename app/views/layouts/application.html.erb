@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>TODO List</title>
+    <%= csrf_meta_tags %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+<!-- include jquery js -->
+<script src="//code.jquery.com/jquery-1.12.0.min.js"></script>
+<script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+  </head>
+
+  <body>
+    <header class="clearfix">
+        <div class="left-nav">
+          <ul>
+            <li>
+              <!-- Only show View List button on pages other than home page -->
+              <% unless action_name =="index" %>
+                <%= link_to 'View List', root_path, class: 'btn btn-default' %>
+              <% end %>
+            </li>
+          </ul>
+        </div>
+
+        <div class="right-nav">
+          <ul>
+            <li>
+              <!-- Only show Add Task button on index/home page -->
+              <% if action_name == "index" %>
+                <%= link_to new_task_path, class: 'btn btn-success' do %>
+                  <i class="glyphicon glyphicon-plus"></i> Add Task
+                <% end %>
+              <% end %>
+            </li>
+          </ul>
+        </div>
+      </header>
+
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+          <% flash.each do |name, msg| %>
+            <%= simple_format(content_tag :div, msg, class: "alert alert-#{name}") %>
+          <% end %>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="content col-md-10 col-md-offset-1">
+
+          <%= yield %>
+
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

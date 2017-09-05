@@ -1,0 +1,17 @@
+// @import "bootstrap-sprockets";
+// File to import not found or unreadable.
+@import "bootstrap";
+
+body {
+  margin: 0;
+}
+
+.container {
+  padding-top: 25px;
+  margin: 10px auto;
+  width: 70%;
+}
+
+.clearfix {
+  overflow: hidden;
+}
