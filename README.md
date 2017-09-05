@@ -1,5 +1,12 @@
 # Todo App
 
+## Domain:
+Todo List
+
+## Interface:
+Web UI (Server-generated)
+
+
 ## Setup
 
 ```
